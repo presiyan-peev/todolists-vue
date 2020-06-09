@@ -26,14 +26,19 @@
       </div>
 
       <v-spacer></v-spacer>
-
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
         text
+        @click="navigateNewTodo()"
       >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
+        <span class="mr-2">Create New</span>
+        <v-icon>mdi-pencil-box</v-icon>
+      </v-btn>
+      <v-btn
+        text
+        @click="navigateHome()"
+      >
+        <span class="mr-2">Home</span>
+        <v-icon>mdi-home</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -47,8 +52,14 @@
 export default {
   name: 'App',
 
-  data: () => ({
-    //
-  }),
+  methos: {
+    navigateHome() {
+      this.$router.push('/')
+    },
+
+    navigateNewTodo() {
+      this.$router.push({name: 'CreateTodo'})
+    }
+  },
 };
 </script>
