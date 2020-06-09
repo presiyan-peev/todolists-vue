@@ -11,8 +11,6 @@ export default {
 
     mutations: {
         SET_ALL_TODOS: (state, val) => {
-            console.log("SET")
-            console.log(val)
             state.allTodos.push(...val)
         }
     },

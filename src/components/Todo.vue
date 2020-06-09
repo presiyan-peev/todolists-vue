@@ -5,7 +5,7 @@
             class="mx-auto"
         >
             <v-list-item>
-            <v-list-item-avatar color="info"></v-list-item-avatar>
+            <v-list-item-avatar color="purple"></v-list-item-avatar>
             <v-list-item-content>
                 <v-list-item-title class="headline">{{ todo.title }}</v-list-item-title>
                 <v-list-item-subtitle>by Kurt Wagner</v-list-item-subtitle>
@@ -25,6 +25,7 @@
             <v-btn
                 text
                 color="deep-purple accent-4"
+                @click="navigateToTasks(todo.id)"
             >
                 Read Tasks
             </v-btn>
@@ -52,6 +53,10 @@ export default {
         setTodo() {
             let _todo = this.getAllTodos.find(x => x.id === this.todoId)
             this.todo = _todo
+        },
+
+        navigateToTasks(id) {
+            this.$router.push({name: 'TodoView', params: {id: id}})
         }
     },
 

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import TodoView from '../views/TodoView.vue'
 
 Vue.use(VueRouter)
 
@@ -9,6 +10,11 @@ Vue.use(VueRouter)
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/todo-view/:id',
+    name: 'TodoView',
+    component: TodoView
   },
   {
     path: '/about',
