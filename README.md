@@ -10,7 +10,7 @@ npm install
 npm run serve
 ```
 
-### Run local server ftom src/_data (json-server need to be installed globally)
+### Run local server from src/_data (json-server need to be installed globally)
 ```
 json-server --watch db.json
 ```
