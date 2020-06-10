@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import TodoView from '../views/TodoView.vue'
+// import CreateTodo from '../views/CreateTodo.vue'
 import Error404 from '../views/Error404.vue'
 
 Vue.use(VueRouter)
@@ -17,6 +18,11 @@ Vue.use(VueRouter)
     name: 'TodoView',
     component: TodoView
   },
+/*   {
+    path: '/create-todo',
+    name: 'CreateTodo',
+    component: CreateTodo
+  }, */
   {
     path: '/about',
     name: 'About',

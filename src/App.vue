@@ -28,14 +28,14 @@
       <v-spacer></v-spacer>
       <v-btn
         text
-        @click="navigateNewTodo()"
+        @click="navigateNewTodo"
       >
         <span class="mr-2">Create New</span>
         <v-icon>mdi-pencil-box</v-icon>
       </v-btn>
       <v-btn
         text
-        @click="navigateHome()"
+        @click="navigateHome"
       >
         <span class="mr-2">Home</span>
         <v-icon>mdi-home</v-icon>
@@ -52,7 +52,7 @@
 export default {
   name: 'App',
 
-  methos: {
+  methods: {
     navigateHome() {
       this.$router.push('/')
     },

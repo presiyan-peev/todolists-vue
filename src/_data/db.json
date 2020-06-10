@@ -9,7 +9,7 @@
         },
         {
             "id": 2,
-            "title": "Call Mitko",
+            "title": "Call Vihren",
             "description": "",
             "tasks": [105],
             "image": "https://image.flaticon.com/icons/svg/190/190132.svg"
@@ -42,7 +42,7 @@
         },
         {
             "id": 105,
-            "title": "Call Mitko",
+            "title": "Call Vihren",
             "description": "0888 000 000",
             "todoList": 2
         }
