@@ -18,7 +18,7 @@
                                 <v-text-field v-model="image" :rules="[rules.required]" label="Image url" maxlength="100" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-btn @click="addTask" small text>Add a Task</v-btn>
+                                <v-btn @click="addTask" small text :disabled="isAddBtnDisabled">Add a Task</v-btn>
                             </v-col>
                         </v-row>
                         <v-row v-for="(task, index) in tasks" :key="task.index">
@@ -50,23 +50,39 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
 
     methods: {
+        ...mapActions(['postTodo', 'postTask']),
+
         addTask() {
+            this.isAddBtnDisabled = true
             this.tasks.push({
+                id: Date.now(),
                 title: '',
                 description: '',
+                todoList: this.id,
             })
+            setTimeout(() => this.isAddBtnDisabled = false, 1100)
         },
 
         removeTask(index) {
-            console.log(index)
+            this.tasks.splice(index, 1)
         },
 
         validate() {
             if (this.$refs.todo.validate()) {
                 // submit form to server/API here...
+                this.postTodo({
+                    id: this.id,
+                    title: this.title,
+                    description: this.description,
+                    tasks: this.tasks.map(x => x.id),
+                    image: this.image
+                })
+                this.postTask(this.tasks)
                 console.log(this.title)
             }
         },
@@ -74,7 +90,9 @@ export default {
 
     data: () => ({
         valid: true,
+        isAddBtnDisabled: false,
         
+        id: Date.now(),
         title: "",
         description: "",
         image: "",
@@ -82,7 +100,7 @@ export default {
         verify: "",
         rules: {
         required: value => !!value || "Required.",
-        min: v => (v && v.length >= 8) || "Min 8 characters"
+        min: v => (v && v.length >= 8) || "Min 8 characters",
         }
     })
 }

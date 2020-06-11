@@ -11,9 +11,12 @@ export default {
 
     mutations: {
         ADD_TASKS: (state, val) => {
-            console.log("SET")
-            console.log(val)
+            state.tasks.splice(0, state.tasks.length)
             state.tasks.push(...val)
+        },
+
+        ADD_TASK: (state, val) => {
+            state.tasks.push(val)
         }
     },
 
@@ -22,6 +25,14 @@ export default {
             await TasksService.fetchAllTasks().then((res) => {
                 commit('ADD_TASKS', res)
             })
+        },
+
+        async postTask({ commit }, tasks) {
+            for(const task of tasks){
+                await TasksService.postTask(task).then(() => {
+                    commit('ADD_TASK', task)
+                })
+            }
         },
     }
 }
