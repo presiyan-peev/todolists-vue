@@ -7,11 +7,8 @@
                 v-for="task in tasks"
                 :key="task.id"
             >
-                <v-list-item-avatar>
-                <v-icon
-                    v-text="task.icon"
-                ></v-icon>
-                </v-list-item-avatar>
+
+                
 
                 <v-list-item-content>
                 <v-list-item-title v-text="task.title"></v-list-item-title>
@@ -19,9 +16,14 @@
                 </v-list-item-content>
 
                 <v-list-item-action>
-                <v-btn icon>
-                    <v-icon color="grey lighten-1">mdi-information</v-icon>
-                </v-btn>
+                    <div>
+                    <v-btn icon class="ml-2">
+                        <v-icon color="green lighten-1">mdi-sticker-check-outline</v-icon>
+                    </v-btn>
+                    <v-btn icon>
+                        <v-icon color="red darken-1">mdi-sticker-remove-outline</v-icon>
+                    </v-btn>
+                    </div>
                 </v-list-item-action>
             </v-list-item>
         </v-list>
@@ -45,8 +47,6 @@ export default {
 
         setTasks() {
             this.tasks = this.getTasksByTodo(this.todoId);
-            console.log("tasks")
-            console.log(this.tasks)
         }
     },
 

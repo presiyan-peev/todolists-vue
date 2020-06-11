@@ -6,7 +6,8 @@ export default {
     },
 
     getters: {
-        getAllTodos: (state) => state.allTodos
+        getAllTodos: (state) => state.allTodos,
+        getTodoById: (state) => (id) => state.allTodos.find(x => x.id == id)
     },
 
     mutations: {
