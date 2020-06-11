@@ -12,12 +12,17 @@ export default {
 
     mutations: {
         SET_ALL_TODOS: (state, val) => {
-            //state.allTodos.splice(0, state.allTodos.length)
             state.allTodos.push(...val)
         },
 
         ADD_TODO: (state, val) => {
             console.log("add")
+            state.allTodos.push(val)
+        },
+
+        UPDATE_TODO: (state, val) => {
+            console.log(`val.id: ${val.id}`)
+            state.allTodos = state.allTodos.filter(x => x.id != val.id)
             state.allTodos.push(val)
         }
     },
@@ -29,11 +34,15 @@ export default {
             })
         },
 
-        // receives "success" msg from API function
         async postTodo({ commit}, todo) {
             await TodoListService.postTodo(todo).then(() => {
-                console.log("kyp")
                 commit('ADD_TODO', todo)
+            })
+        },
+
+        async updateTodo({ commit}, todo) {
+            await TodoListService.updateTodo(todo).then(() => {
+                commit('UPDATE_TODO', todo)
             })
         }
     }

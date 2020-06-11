@@ -25,7 +25,7 @@ Vue.use(VueRouter)
     component: CreateTodo
   },
   {
-    path: '/edit-todo',
+    path: '/edit-todo/:id',
     name: 'EditTodo',
     component: EditTodo
   },

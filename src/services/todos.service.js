@@ -26,6 +26,19 @@ const TodoListService = {
 
         return response.data
     },
+
+    updateTodo: async function(todo) {
+
+        const requestData = {
+            method: 'put',
+            url: `/todos/${todo.id}`,
+            data: todo
+        }
+
+        const response = await ApiService.customRequest(requestData)
+
+        return response.data
+    },
 }
 
 export { TodoListService }

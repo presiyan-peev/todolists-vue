@@ -23,12 +23,9 @@
     },
     {
       "id": 1591863424121,
-      "title": "Learn Vue",
+      "title": "Learn Vue.js",
       "description": "Learn vue",
-      "tasks": [
-        1591863436547,
-        1591863446128
-      ],
+      "tasks": [],
       "image": "https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg"
     }
   ],

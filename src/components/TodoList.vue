@@ -29,8 +29,6 @@ export default {
 
         setTodos() {
             this.todos = this.getAllTodos;
-            console.log("todos")
-            console.log(this.todos)
         }
     },
 

@@ -50,12 +50,25 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
 
+    computed: {
+        ...mapGetters(['getTodoById'])
+    },
+
     methods: {
-        ...mapActions(['postTodo', 'postTask']),
+        ...mapActions(['updateTodo', 'updateTask']),
+
+        setTodoData() {
+            const todo = this.getTodoById(this.$route.params.id)
+            this.id = todo.id
+            this.title = todo.title
+            this.description = todo.description
+            this.image = todo.image
+            this.tasks.push(todo.tasks)
+        },
 
         addTask() {
             this.isAddBtnDisabled = true
@@ -75,17 +88,20 @@ export default {
         validate() {
             if (this.$refs.todo.validate()) {
                 // submit form to server/API here...
-                this.postTodo({
+                this.updateTodo({
                     id: this.id,
                     title: this.title,
                     description: this.description,
                     tasks: this.tasks.map(x => x.id),
                     image: this.image
                 })
-                this.postTask(this.tasks)
-                console.log(this.title)
+             //   this.updateTask(this.tasks)
             }
         },
+    },
+
+    created() {
+        this.setTodoData()
     },
 
     data: () => ({
