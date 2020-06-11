@@ -49,17 +49,26 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: 'App',
 
   methods: {
+    ...mapActions(['fetchAll', 'fetchAllTasks']),
+
     navigateHome() {
       this.$router.push('/')
     },
 
     navigateNewTodo() {
       this.$router.push({name: 'CreateTodo'})
-    }
+    },
   },
+
+  created() {
+    this.fetchAll();
+    this.fetchAllTasks();
+  }
 };
 </script>

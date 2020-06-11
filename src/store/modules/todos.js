@@ -11,11 +11,12 @@ export default {
 
     mutations: {
         SET_ALL_TODOS: (state, val) => {
-            state.allTodos.splice(0, state.allTodos.length)
+            //state.allTodos.splice(0, state.allTodos.length)
             state.allTodos.push(...val)
         },
 
         ADD_TODO: (state, val) => {
+            console.log("add")
             state.allTodos.push(val)
         }
     },
@@ -29,7 +30,8 @@ export default {
 
         // receives "success" msg from API function
         async postTodo({ commit}, todo) {
-            await TodoListService.postTodo(todo)(() => {
+            await TodoListService.postTodo(todo).then(() => {
+                console.log("kyp")
                 commit('ADD_TODO', todo)
             })
         }

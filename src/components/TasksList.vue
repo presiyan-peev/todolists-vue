@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
     props: [
@@ -41,10 +41,9 @@ export default {
     },
 
     methods: {
-        ...mapActions(["fetchAllTasks"]),
+        //...mapActions(["fetchAllTasks"]),
 
-        async setTasks() {
-            await this.fetchAllTasks()
+        setTasks() {
             this.tasks = this.getTasksByTodo(this.todoId);
             console.log("tasks")
             console.log(this.tasks)

@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <v-col lg="4" md="6" xs="12" 
-            v-for="todo in getAllTodos" :key="todo.id">
+            v-for="todo in todos" :key="todo.id">
             <Todo :todoId="todo.id" />
         </v-col>
       </v-row>
@@ -13,7 +13,7 @@
 
 <script>
 import Todo from './Todo'
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
     components: {
@@ -25,11 +25,23 @@ export default {
     },
 
     methods: {
-        ...mapActions(["fetchAll"])
+        //...mapActions(["fetchAllTasks"]),
+
+        setTodos() {
+            this.todos = this.getAllTodos;
+            console.log("todos")
+            console.log(this.todos)
+        }
     },
 
     created() {
-        this.fetchAll();
+        this.setTodos()
+    },
+
+    data: () => {
+        return {
+            todos: []
+        }
     }
 };
 </script>

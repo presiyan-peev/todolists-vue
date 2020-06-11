@@ -8,7 +8,6 @@
             <v-list-item-avatar color="purple"></v-list-item-avatar>
             <v-list-item-content>
                 <v-list-item-title class="headline">{{ todo.title }}</v-list-item-title>
-                <v-list-item-subtitle>by Kurt Wagner</v-list-item-subtitle>
             </v-list-item-content>
             </v-list-item>
 
@@ -16,10 +15,6 @@
             :src="todo.image"
             height="194"
             ></v-img>
-
-            <v-card-text>
-                {{ todo.description }}
-            </v-card-text>
 
             <v-card-actions>
             <v-btn
