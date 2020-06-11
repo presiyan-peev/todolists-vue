@@ -39,6 +39,18 @@ const TodoListService = {
 
         return response.data
     },
+
+    deleteTodo: async function(todoId) {
+
+        const requestData = {
+            method: 'delete',
+            url: `/todos/${todoId}`,
+        }
+
+        const response = await ApiService.customRequest(requestData)
+
+        return response.data
+    },
 }
 
 export { TodoListService }
