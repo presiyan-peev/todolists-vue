@@ -27,7 +27,7 @@
                                 <v-text-field v-model="task.title" :rules="[rules.required]" label="Task Title" maxlength="20" required></v-text-field>
                             </v-col>    
                             <v-col class="d-flex mr-auto" cols="2">
-                                <v-icon @click="removeTask(index)">mdi-trash-can</v-icon>
+                                <v-icon @click="removeTask(index, task.id)">mdi-trash-can</v-icon>
                             </v-col>
                             <v-col class="d-flex mr-auto" cols="12">
                                 <v-text-field v-model="task.description" :rules="[rules.required]" label="Task description" maxlength="100" required></v-text-field>
@@ -55,11 +55,11 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
 
     computed: {
-        ...mapGetters(['getTodoById'])
+        ...mapGetters(['getTodoById', 'getTasksByTodo'])
     },
 
     methods: {
-        ...mapActions(['updateTodo', 'updateTask']),
+        ...mapActions(['updateTodo', 'updateTasks', 'deleteTasks']),
 
         setTodoData() {
             const todo = this.getTodoById(this.$route.params.id)
@@ -67,7 +67,10 @@ export default {
             this.title = todo.title
             this.description = todo.description
             this.image = todo.image
-            this.tasks.push(todo.tasks)
+        },
+
+        setTasksData() {
+            this.tasks.push(...this.getTasksByTodo(this.id))
         },
 
         addTask() {
@@ -81,8 +84,9 @@ export default {
             setTimeout(() => this.isAddBtnDisabled = false, 1100)
         },
 
-        removeTask(index) {
+        removeTask(index, id) {
             this.tasks.splice(index, 1)
+            this.removedTasksIds.push(id)
         },
 
         validate() {
@@ -95,13 +99,15 @@ export default {
                     tasks: this.tasks.map(x => x.id),
                     image: this.image
                 })
-             //   this.updateTask(this.tasks)
+                this.updateTasks(this.tasks)
+                this.deleteTasks(this.removedTasksIds)
             }
         },
     },
 
     created() {
         this.setTodoData()
+        this.setTasksData()
     },
 
     data: () => ({
@@ -113,6 +119,7 @@ export default {
         description: "",
         image: "",
         tasks: [],
+        removedTasksIds: [],
         verify: "",
         rules: {
             required: value => !!value || "Required.",

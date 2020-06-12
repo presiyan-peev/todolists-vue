@@ -34,9 +34,6 @@ export default {
             
             //I do this to trigger the Getter
             state.allTodos.reverse()
-            console.log(state.allTodos.length)
-            console.log(val)
-            console.log("mut")
         },
 
 

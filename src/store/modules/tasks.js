@@ -17,7 +17,20 @@ export default {
 
         ADD_TASK: (state, val) => {
             state.tasks.push(val)
-        }
+        },
+
+        UPDATE_TASK: (state, val) => {
+            state.tasks = state.tasks.filter(x => x.id != val.id)
+            state.tasks.push(val)
+        },
+
+        REMOVE_TASK: (state, val) => {
+            state.tasks = state.tasks.filter(x => x.id != val)
+            
+            //I do this to trigger the Getter
+            state.tasks.push('a')
+            state.tasks.pop('a')
+        },
     },
 
     actions: {
@@ -27,12 +40,42 @@ export default {
             })
         },
 
-        async postTask({ commit }, tasks) {
+        async postTasks({ commit }, tasks) {
             for(const task of tasks){
                 await TasksService.postTask(task).then(() => {
                     commit('ADD_TASK', task)
                 })
             }
         },
+
+        /** TO DO
+            Move this logic to the backend
+         */
+        async updateTasks({ commit }, tasks) {
+            for(const task of tasks){
+                const response = await TasksService.updateTask(task).then((res) => {
+                    if(res != 404){
+                        commit('UPDATE_TASK', task)
+                    }
+                    return res
+                })
+                if (response == 404) {
+                    await TasksService.postTask(task).then(() => {
+                        commit('ADD_TASK', task)
+                    })
+                }
+            }
+        },
+        
+        /**
+         * tasks is an array of task IDs
+         */
+        async deleteTasks({ commit }, tasks) {
+            for(const task of tasks) {
+                await TasksService.deleteTask(task).then(() => {
+                    commit('REMOVE_TASK', task)
+                })
+            }
+        }
     }
 }

@@ -7,9 +7,6 @@
                 v-for="task in tasks"
                 :key="task.id"
             >
-
-                
-
                 <v-list-item-content>
                 <v-list-item-title v-text="task.title"></v-list-item-title>
                 <v-list-item-subtitle v-text="task.description"></v-list-item-subtitle>
@@ -21,7 +18,7 @@
                         <v-icon color="green lighten-1">mdi-sticker-check-outline</v-icon>
                     </v-btn>
                     <v-btn icon>
-                        <v-icon color="red darken-1">mdi-sticker-remove-outline</v-icon>
+                        <v-icon color="red darken-1" @click="deleteTask(task.id)">mdi-sticker-remove-outline</v-icon>
                     </v-btn>
                     </div>
                 </v-list-item-action>
@@ -31,7 +28,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
     props: [
@@ -43,10 +40,16 @@ export default {
     },
 
     methods: {
-        //...mapActions(["fetchAllTasks"]),
+        ...mapActions(["deleteTasks"]),
 
         setTasks() {
             this.tasks = this.getTasksByTodo(this.todoId);
+        },
+
+        deleteTask(id) {
+            this.deleteTasks([id]).then(() => {
+                this.setTasks()
+            })
         }
     },
 

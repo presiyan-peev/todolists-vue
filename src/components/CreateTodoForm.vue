@@ -55,7 +55,7 @@ import { mapActions } from 'vuex'
 export default {
 
     methods: {
-        ...mapActions(['postTodo', 'postTask']),
+        ...mapActions(['postTodo', 'postTasks']),
 
         addTask() {
             this.isAddBtnDisabled = true
@@ -82,7 +82,7 @@ export default {
                     tasks: this.tasks.map(x => x.id),
                     image: this.image
                 })
-                this.postTask(this.tasks)
+                this.postTasks(this.tasks)
                 console.log(this.title)
             }
         },
