@@ -17,26 +17,35 @@
                             <v-col cols="12">
                                 <v-text-field v-model="image" :rules="[rules.required]" label="Image url" maxlength="100" required></v-text-field>
                             </v-col>
-                            <v-col cols="12">
-                                <v-btn @click="addTask" small text :disabled="isAddBtnDisabled">Add a Task</v-btn>
-                            </v-col>
                         </v-row>
                         <v-row v-for="(task, index) in tasks" :key="task.index">
+             
+                            <v-col cols="12" class="px-2">
+                                <v-card class="px-2">
+                                    <v-row>
+                                        <v-col class="d-flex mr-auto" cols="10">
+                                            <v-text-field v-model="task.title" :rules="[rules.required]" label="Task Title" maxlength="20" required></v-text-field>
+                                        </v-col>    
+                                        <v-col class="d-flex mr-auto" cols="2">
+                                            <v-icon @click="removeTask(index)">mdi-trash-can</v-icon>
+                                        </v-col>
+                                        <v-col cols="1"></v-col>
+                                        <v-col cols="1"></v-col>
+                                        <v-col class="d-flex mr-auto" cols="12">
+                                            <v-text-field v-model="task.description" :rules="[rules.required]" label="Task description" maxlength="100" required></v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                </v-card>
+                            </v-col>
                             
-                            <v-col class="d-flex mr-auto" cols="10">
-                                <v-text-field v-model="task.title" :rules="[rules.required]" label="Task Title" maxlength="20" required></v-text-field>
-                            </v-col>    
-                            <v-col class="d-flex mr-auto" cols="2">
-                                <v-icon @click="removeTask(index, task.id)">mdi-trash-can</v-icon>
-                            </v-col>
-                            <v-col class="d-flex mr-auto" cols="12">
-                                <v-text-field v-model="task.description" :rules="[rules.required]" label="Task description" maxlength="100" required></v-text-field>
-                                
-                            </v-col>
                         </v-row>
+                        
                         <v-row>
+                            <v-col cols="12">
+                                <v-btn @click="addTask" color="primary" small text :disabled="isAddBtnDisabled">Add a Task</v-btn>
+                            </v-col>
                             <v-col class="d-flex align-right" cols="6" sm="3" xsm="3">
-                                <v-btn x-large block depressed :disabled="!valid" color="primary lighten-1" @click="validate">Submit</v-btn>
+                                <v-btn x-large block depressed :disabled="!valid" tile color="success lighten-2" @click="validate">Edit</v-btn>
                             </v-col>
                         </v-row>
                     </v-form>
@@ -91,7 +100,6 @@ export default {
 
         validate() {
             if (this.$refs.todo.validate()) {
-                // submit form to server/API here...
                 this.updateTodo({
                     id: this.id,
                     title: this.title,
